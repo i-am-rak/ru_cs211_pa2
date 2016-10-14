@@ -1,4 +1,6 @@
 #ignore compiled c files
 *.[oa]
-#include ignore compiled calc program
+#ignore compiled calc program
 calc
+#ignore calc documentation
+calc.pdf
