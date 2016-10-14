@@ -22,6 +22,9 @@ int checkOperation(char * input){
 int main(int argc, char **argv){
     int operation = 0;
     operation = checkOperation(argv[1]);
+    if(operation == 666){
+        printf("Error: Invalid operation '%s'", argv[1]);
+    }
     //printf("%d , %s\n", operation, argv[1]);
     
     return 0;
