@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
 
 char * intToASCII(int x, char * output,int base,int sign){
     //char * octChar = "01234567";
@@ -8,7 +11,7 @@ char * intToASCII(int x, char * output,int base,int sign){
     }
     int i,n = 0;
     char * cstr = malloc(32);
-    char c = 0;
+    //char c = 0;
     char * output2 = malloc(32);
     output2[0] = '\0';
     while(x!=0){
@@ -63,7 +66,29 @@ int ASCIIToInt(char * str,int base, int sign) {
 
 
 
-int main(char argc, char ** argv){
+int main(int argc, char ** argv){
+    
+    if(argv[2][0] == 'f'){
+        char * str = argv[1];
+        int *x;
+        memcpy(x,str,sizeof(int));
+        printf("%d\n",*x);
 
-   return 0; 
+    }
+    else if(argv[2][0] == 'i'){
+        char * output = malloc(32);
+        int sign = 0;
+        char signchar = 0;
+        int x = ASCIIToInt(argv[1],2,0);
+        if(x < 0){
+            sign = 1;
+            signchar = '-';
+        }
+        output = intToASCII(ASCIIToInt(argv[1],2,0),output,10,sign);
+        printf("%c%s\n",signchar, output);
+        printf("%d\n", x);
+    }
+
+
+    return 0; 
 }
