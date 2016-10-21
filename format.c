@@ -1,3 +1,9 @@
+/*
+ * Anuraag Shankar
+ * Format.c Program
+ * CS211
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
