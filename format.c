@@ -236,37 +236,61 @@ floatToASCII( float x, char * output )
 
 
 int main(int argc, char ** argv){
-    
-    if(argv[2][0] == 'f'){
-        char * output = malloc(32);
-        int sign = 0;
-        char signchar = 0;
+       
+    if(strlen(argv[1]) != 32){
+        fprintf(stderr,"ERROR: Input is not a 32 bit size binary number.\n");
+        return 0;
+    }
+
+    int i;
+    for(i = 0; i < 32; i++){
+        if(argv[1][i]  != '1' && argv[1][i] != '0'){
+            fprintf(stderr,"ERROR: Binary input contains invalid characters.\n");
+            //printf("%d\n",i);
+            return 0;
+        }
+    }   
+
+
+    if(strcmp(argv[2],"float") == 0){
+        char * output = malloc(35);
+        //int sign = 0;
+        //char signchar = 0;
         int x = ASCIIToInt(argv[1],2,0);
         float y = 0;
         memcpy(&y,&x,sizeof(x));
-
+        /*
         if(x < 0){
             sign = 1;
             signchar = '-';
-        }
+        }*/
         floatToASCII(y,output);
-        printf("%s\n",output);
-//        printf("%d\n", x);
+        //strcat(output,"\n");//better to include \n in the formal string
+        fprintf(stdout,"%s\n",output);
+        //printf("%s\n",output);
+        //printf("%d\n", x);
 
 
     }
-    else if(argv[2][0] == 'i'){
-        char * output = malloc(32);
+    else if(strcmp(argv[2],"int") == 0){
+        char * output = malloc(35);
         int sign = 0;
-        char signchar = 0;
+        char * signchar = malloc(36);
+        signchar[0] = 0;
         int x = ASCIIToInt(argv[1],2,0);
         if(x < 0){
             sign = 1;
-            signchar = '-';
+            signchar[0] = '-';
         }
+        
+
         output = intToASCII(ASCIIToInt(argv[1],2,0),output,10,sign);
-        printf("%c%s\n",signchar, output);
+        strcat(signchar,output);
+        fprintf(stdout,"%s\n", signchar);
   //:      printf("%d\n", x);
+    }
+    else{
+        fprintf(stderr,"ERROR: Incorrect output type\n");
     }
     
 
