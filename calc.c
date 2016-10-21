@@ -33,10 +33,21 @@ int checkSign(char * input){//Check the sign
     }
 }
 
+int checkCorrectBase(char x,int base){
+    if(((x - '0') < 10) && ((x -'0') < base)){
+        return 0;
+    }
+    else if((base > 10) && (((x - 'A' + 10) < base) || ((x - 'a' + 10) < base))){
+        return 0;
+    }
+    else
+        return 1;
+}
+
 int checkBase(char * input){ //Check the base
     if(input[0] == '-'){
         if(input[1] == 'b'){
-            return 1;
+            return 2;
         }
         else if(input[1] == 'd'){
             return 10;
@@ -120,7 +131,7 @@ char * intToASCII(int x, char * output,int base,int sign){
     }
     int i,n = 0;
     char * cstr = malloc(32);
-    char c = 0;
+    //char c = 0;
     char * output2 = malloc(32);
     output2[0] = '\0';
     while(x!=0){
@@ -208,6 +219,13 @@ unsigned int octASCIIToInt(char * str){
 }
 
 int main(int argc, char **argv){
+
+    if(argc != 5){
+        fprintf(stderr,"ERROR: Incorrect number of inputs\n");
+        return 0;
+    }
+
+
     int operation = 0;
     int sign1 = 0;
     int base1 = 0;
@@ -217,18 +235,34 @@ int main(int argc, char **argv){
     int value2 = 0;
     int output = 0;
     int outputSign = 0;
+    char baseChar = argv[4][0];
+    int base = checkBase(argv[4]);
+   
+
+    if(base == 666){
+        fprintf(stderr, "ERROR: Incorrect output type\n");
+        return 0;
+    }
 
     operation = checkOperation(argv[1]);    
     if(operation == 666){
-        printf("Error: Invalid operation '%s'", argv[1]);
+        fprintf(stderr,"ERROR: Invalid operation '%s'\n", argv[1]);
         return 0;
     }
     //printf("%d , %s\n", operation, argv[1]);
     sign1 = checkSign(argv[2]);
     base1 = checkBase(argv[2]);
     if(base1 == 666){
-        printf("Error: Invalid input '%s'", argv[2]);
+        fprintf(stderr,"ERROR: Invalid base '%s'\n", argv[2]);
         return 0;
+    }
+
+    int i;
+    for(i = 1; i < strlen(argv[2]); i++){
+        if(checkCorrectBase(argv[2][i],base1)){
+            fprintf(stderr, "ERROR: Invalid input\n");
+            return 0;
+        }
     }
 
     //printf("%d , %s\n", sign1, argv[2]);
@@ -237,9 +271,17 @@ int main(int argc, char **argv){
     sign2 = checkSign(argv[3]);
     base2 = checkBase(argv[3]);
     if(base2 == 666){
-        printf("Error: Invalid input '%s'", argv[3]);
+        fprintf(stderr,"ERROR: Invalid base '%s'\n", argv[3]);
         return 0;
     }
+    for(i = 1; i < strlen(argv[3]); i++){
+           if(checkCorrectBase(argv[3][i],base2)){
+               fprintf(stderr, "ERROR: Invalid input\n");
+               return 0;
+           }
+       }
+
+
     
     switch(base1){
         case(2):
@@ -316,13 +358,13 @@ int main(int argc, char **argv){
 
 
     char * outputStr = malloc(35);
-    char baseChar = argv[4][0];
-    int base = checkBase(argv[4]);
     char signChar = 0;
     if(outputSign == 1){
         signChar = '-';         
     }
-    printf("%c%c%s\n", signChar,baseChar,intToASCII(output,outputStr,base,outputSign)); 
+
+
+    fprintf(stdout,"%c%c%s\n", signChar,baseChar,intToASCII(output,outputStr,base,outputSign)); 
 
     //printf("%d , %s\n", sign2, argv[3]); 
     //printf("%d , %s\n", base2, argv[3]);
