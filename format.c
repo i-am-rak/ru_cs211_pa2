@@ -159,8 +159,8 @@ floatToASCII( float x, char * output )
 	biasedExp = a.i >> 23 & 0x000000ff;
 	mantissa = a.i & 0x007fffff;
 	sign = a.i >> 31;
-	printf( "BKR x is %g.  biasedExp is %x  mantissa is %08x  sign is %d\n", x,
-		biasedExp, mantissa, sign );
+	//printf( "BKR x is %g.  biasedExp is %x  mantissa is %08x  sign is %d\n", x,
+//		biasedExp, mantissa, sign );
 	if ( biasedExp == 0xff )
 	{
 		if ( mantissa == 0 )
@@ -244,7 +244,10 @@ floatToASCII( float x, char * output )
 
 
 int main(int argc, char ** argv){
-       
+    if(argc != 3){
+        fprintf(stderr, "ERROR: Incorrect number of bits\n");
+        return 0;
+    }   
     if(strlen(argv[1]) != 32){
         fprintf(stderr,"ERROR: Input is not a 32 bit size binary number.\n");
         return 0;
