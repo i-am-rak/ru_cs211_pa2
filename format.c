@@ -40,6 +40,8 @@ char * intToASCII(int x, char * output,int base,int sign){
 
     cstr = 0;
     free(cstr);
+    output2 = 0;
+    free(output2);
     
     return output;
 }
@@ -273,6 +275,7 @@ int main(int argc, char ** argv){
         floatToASCII(y,output);
         //strcat(output,"\n");//better to include \n in the formal string
         fprintf(stdout,"%s\n",output);
+        free(output);
         //printf("%s\n",output);
         //printf("%d\n", x);
 
@@ -293,6 +296,8 @@ int main(int argc, char ** argv){
         output = intToASCII(ASCIIToInt(argv[1],2,0),output,10,sign);
         strcat(signchar,output);
         fprintf(stdout,"%s\n", signchar);
+        free(output);
+        free(signchar);
   //:      printf("%d\n", x);
     }
     else{
