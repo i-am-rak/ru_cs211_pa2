@@ -245,7 +245,7 @@ floatToASCII( float x, char * output )
 
 int main(int argc, char ** argv){
     if(argc != 3){
-        fprintf(stderr, "ERROR: Incorrect number of bits\n");
+        fprintf(stderr, "ERROR: Incorrect number of arguments\n");
         return 0;
     }   
     if(strlen(argv[1]) != 32){
