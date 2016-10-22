@@ -20,7 +20,7 @@ int checkOperation(char * input){//Check the operation
         return 3;
     }
     else{
-        return 666;
+        return 666;//invalid operation
     }
 }
 
@@ -29,7 +29,7 @@ int checkSign(char * input){//Check the sign
         return 1;
     } 
     else{
-        return 0;
+        return 0; //positive
     }
 }
 
@@ -77,7 +77,7 @@ int checkBase(char * input){ //Check the base
 
     return 666;
 }
-
+/* //code is no longer used
 char * intToBinaryASCII(unsigned int x, char * output){//convert int to ascii
     unsigned int i, n = 0;
     char * cstr = malloc(3);
@@ -123,8 +123,8 @@ unsigned int binASCIIToInt(char * str){
     //printf("test0");
     return value;
 }
-
-char * intToASCII(int x, char * output,int base,int sign){
+*/
+char * intToASCII(int x, char * output,int base,int sign){//converts int to ascii
     //char * octChar = "01234567";
     if(sign == 1){
         x = x*-1;
@@ -159,7 +159,7 @@ char * intToASCII(int x, char * output,int base,int sign){
     return output;
 }
 
-int ASCIIToInt(char * str,int base, int sign) {
+int ASCIIToInt(char * str,int base, int sign) {//converts ascii to int
 
     int output = 0;
     int i = 0;
@@ -182,7 +182,7 @@ int ASCIIToInt(char * str,int base, int sign) {
 
     return output;
 }
-
+/*//No longer used code
 unsigned int octASCIIToInt(char * str){
     int i, value = 0;
     for(i = 0; str[i]!= '\0'; i++){
@@ -217,6 +217,7 @@ unsigned int octASCIIToInt(char * str){
   //  printf("value %d\n", value);
     return value;
 }
+*/
 
 int main(int argc, char **argv){
 
@@ -224,7 +225,6 @@ int main(int argc, char **argv){
         fprintf(stderr,"ERROR: Incorrect number of inputs\n");
         return 0;
     }
-
 
     int operation = 0;
     int sign1 = 0;
@@ -238,7 +238,6 @@ int main(int argc, char **argv){
     char baseChar = argv[4][0];
     int base = checkBase(argv[4]);
    
-
     if(base == 666){
         fprintf(stderr, "ERROR: Incorrect output type\n");
         return 0;
@@ -363,7 +362,7 @@ int main(int argc, char **argv){
         signChar = '-';         
     }
 
-
+    //you can also use strings and concat
     fprintf(stdout,"%c%c%s\n", signChar,baseChar,intToASCII(output,outputStr,base,outputSign)); 
 
     //printf("%d , %s\n", sign2, argv[3]); 
