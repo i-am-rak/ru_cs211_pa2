@@ -10,6 +10,8 @@
 
 This assignment is designed to help you learn the representation, interpretation, and manipulation of data as bits. There are two parts. In the first part, you will implement a program calc to add and subtract numbers specified in different bases (multiplication is extra credit). In the second part, you will implement a program format that will print the decimal values of bit sequences representing integer and floating point data types.
 
+(Disclaimer : Make sure to follow university guidelines if looking at code.(IE. copying code goes against most rules.)
+
 ###2 Numeric Base Conversion and Calculator
 
 Implement a program called calc with the following usage interface:
